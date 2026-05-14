@@ -1,0 +1,29 @@
+[tool.poetry]
+name = "propresenter-train"
+version = "0.1.0"
+description = "Human-guided slide timing trainer for ProPresenter — plays an audio file and records slide trigger times as a gold-copy JSON for benchmarking automated systems"
+authors = ["scaperoth@berkeley.edu"]
+readme = "README.md"
+packages = [{include = "propresenter_train", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.11,<4.0"
+sounddevice = "*"
+soundfile = "*"
+numpy = ">=2.0"
+requests = "*"
+propresenter-client = {path = "../propresenter-client", develop = true}
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.0"
+pytest-mock = "*"
+
+[tool.poetry.scripts]
+propresenter-train = "propresenter_train.main:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
