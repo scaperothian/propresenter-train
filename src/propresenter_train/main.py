@@ -63,7 +63,7 @@ def _build_parser() -> argparse.ArgumentParser:
     out_grp = parser.add_argument_group("Output")
     out_grp.add_argument(
         "--output-dir",
-        default=".",
+        default="output",
         metavar="DIR",
         dest="output_dir",
         help="Directory in which to write the JSON timing file",

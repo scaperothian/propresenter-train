@@ -1,0 +1,76 @@
+{
+  "presentation": {
+    "id": {
+      "uuid": "7A465FF0-FF42-4785-82F1-5CF0DC136BAE",
+      "name": "The Pledge of Allegiance",
+      "index": 19,
+      "audio": "/Users/das/propresenter-speech/audio/pledge_of_allegiance.wav"
+    },
+    "groups": [
+      {
+        "name": "",
+        "color": null,
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "I pledge allegiance to the flag",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": 0.0
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Of the United States of America",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": 2.752
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "And to the republic for which it stands",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": 5.058
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "One Nation, Under God, Indivisible",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": 7.733
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "With Liberty and Justice for All",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": 11.485
+          }
+        ]
+      }
+    ],
+    "has_timeline": false,
+    "presentation_path": "/Users/das/Documents/ProPresenter/Libraries/Default/The Pledge of Allegiance.pro",
+    "destination": "presentation"
+  }
+}
