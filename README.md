@@ -29,10 +29,10 @@ Requires Python 3.11+ and ProPresenter running locally on port 1025 (or specify
 ## Usage
 
 ```bash
-# Basic — positional args: audio file, presentation name
+# Basic — JSON is written to ./output/ by default
 poetry run propresenter-train audio/sermon.wav "Sunday Sermon"
 
-# Save JSON to a specific directory
+# Write JSON to a specific directory instead
 poetry run propresenter-train audio/pledge.wav "Pledge of Allegiance" --output-dir sessions/
 
 # Presentation is already active — skip the activate step

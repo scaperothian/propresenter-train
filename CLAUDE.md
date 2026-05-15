@@ -53,7 +53,7 @@ poetry install
 # Basic usage (positional args: audio file, presentation name)
 poetry run propresenter-train audio/sermon.wav "Sunday Sermon"
 
-# Write JSON to a specific directory
+# JSON lands in ./output/ by default; override with --output-dir
 poetry run propresenter-train audio/pledge.wav "Pledge of Allegiance" --output-dir sessions/
 
 # Skip activating the presentation (if already active in ProPresenter)
