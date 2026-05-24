@@ -3,6 +3,7 @@ CLI entry point for propresenter-train.
 
 Usage examples:
   propresenter-train audio/sermon.wav "Sunday Sermon"
+  propresenter-train audio/sermon.wav "Sunday Sermon" --mode slide-label
   propresenter-train audio/pledge.wav "Pledge of Allegiance" --output-dir sessions/
   propresenter-train audio/worship.wav "Worship Set" --host 192.168.1.10 --no-activate
   propresenter-train audio/service.wav "Service" --library Songs
@@ -15,7 +16,7 @@ from pathlib import Path
 
 from propresenter_client.main import ProPresenterController
 
-from .trainer import TrainingSession
+from .trainer import MODE_SLIDE_LABEL, MODE_TRIGGER_LABEL, TrainingSession
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -58,6 +59,25 @@ def _build_parser() -> argparse.ArgumentParser:
         action="store_true",
         dest="no_activate",
         help="Skip activating the presentation (use when it is already active)",
+    )
+
+    parser.add_argument(
+        "--mode",
+        default=MODE_TRIGGER_LABEL,
+        choices=[MODE_TRIGGER_LABEL, MODE_SLIDE_LABEL],
+        help=(
+            f"{MODE_TRIGGER_LABEL}: record when each slide is triggered. "
+            f"{MODE_SLIDE_LABEL}: record audio start/stop boundaries per slide "
+            "(each 'next' stamps stop on the current slide and start on the next)."
+        ),
+    )
+
+    parser.add_argument(
+        "--device",
+        type=int,
+        default=None,
+        metavar="INDEX",
+        help="Output audio device index (run 'python -m sounddevice' to list; default: system default)",
     )
 
     out_grp = parser.add_argument_group("Output")
@@ -131,10 +151,11 @@ def main() -> None:
         controller=pro,
         presentation_details=details,
         audio_path=audio_path,
+        mode=args.mode,
     )
 
     try:
-        session.run()
+        session.run(device=args.device)
     except KeyboardInterrupt:
         print("\n\nInterrupted — saving partial results...")
 

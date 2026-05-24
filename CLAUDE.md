@@ -2,13 +2,17 @@
 
 ## What this project does
 
-CLI tool for recording a human trainer's slide-change timings against a fixed audio
-file.  It plays back the audio, lets the trainer control ProPresenter slides
-interactively, and writes a JSON file that mirrors the `/v1/presentation/{uuid}`
-API response with two additions:
+CLI tool for recording a human trainer's slide timings against a fixed audio file.
+It plays back the audio, lets the trainer control ProPresenter slides interactively,
+and writes a JSON file that mirrors the `/v1/presentation/{uuid}` API response with
+per-slide timing keys added. Supports two modes:
 
-- `presentation.id.audio` — path of the audio file used for the session
-- `"trigger time"` key on each triggered slide dict — seconds elapsed since audio start
+| Mode | CLI flag | JSON keys added to each slide |
+|------|----------|-------------------------------|
+| `trigger-label` (default) | `--mode trigger-label` | `"trigger time"` — when the slide was cued |
+| `slide-label` | `--mode slide-label` | `"start time"` and `"stop time"` — audio section boundaries |
+
+In both modes `presentation.id.audio` is added with the path of the training audio file.
 
 The resulting JSON is the **gold copy** used to evaluate automated slide-cueing
 systems (propresenter-speech, etc.) against the same audio file.
@@ -19,6 +23,7 @@ systems (propresenter-speech, etc.) against the same audio file.
 |---------|--------|
 | Training session + JSON build | `src/propresenter_train/trainer.py` — `TrainingSession` |
 | CLI entry point | `src/propresenter_train/main.py` |
+| Mode constants | `trainer.py` — `MODE_TRIGGER_LABEL`, `MODE_SLIDE_LABEL` |
 | ProPresenter HTTP client | `../propresenter-client/src/propresenter_client/main.py` — imported via path dep |
 
 `TrainingSession` reuses `_get_command()` and `ProPresenterController` directly from
@@ -28,15 +33,16 @@ client's interactive mode.
 ## Key design decisions
 
 - **Timing** — `time.perf_counter()` captures the trigger time *before* the
-  ProPresenter API call (network latency excluded from the recorded time).
+  ProPresenter API call so network latency is excluded from the recorded value.
 - **Traversal parity** — `_annotate()` in `trainer.py` mirrors
   `ProPresenterController.find_slides()` exactly so flat slide indices map
-  identically in both the trigger-time dict and the output JSON.
+  identically in both the in-memory timing dicts and the output JSON.
 - **Starting slide** — the active slide at audio-start is automatically recorded at
-  `t = 0.0`.  If the trainer backtracks and re-triggers a slide, the newer time
-  overwrites the older one.
-- **Untriggered slides** — slides never reached by the trainer have no `"trigger time"`
-  key in the output JSON.
+  `t = 0.0` in both modes.
+- **slide-label invariant** — `stop_time[X]` always equals `start_time[X+1]`; a
+  single keypress stamps both simultaneously.
+- **Untriggered slides** — slides never reached by the trainer have no timing keys
+  in the output JSON.
 
 ## Project conventions
 
@@ -50,8 +56,11 @@ client's interactive mode.
 # Install deps
 poetry install
 
-# Basic usage (positional args: audio file, presentation name)
+# trigger-label mode (default) — records when each slide is cued
 poetry run propresenter-train audio/sermon.wav "Sunday Sermon"
+
+# slide-label mode — records audio start/stop boundaries per slide
+poetry run propresenter-train audio/sermon.wav "Sunday Sermon" --mode slide-label
 
 # JSON lands in ./output/ by default; override with --output-dir
 poetry run propresenter-train audio/pledge.wav "Pledge of Allegiance" --output-dir sessions/
@@ -88,6 +97,8 @@ Tests are unit-level — no audio hardware, no ProPresenter server required.
 
 ## Output JSON shape
 
+### trigger-label mode
+
 ```json
 {
   "presentation": {
@@ -102,20 +113,33 @@ Tests are unit-level — no audio hardware, no ProPresenter server required.
         "name": "",
         "color": null,
         "slides": [
-          {
-            "enabled": true,
-            "notes": "",
-            "trigger time": 0.0,
-            "text": "Opening words",
-            "label": ""
-          },
-          {
-            "enabled": true,
-            "notes": "",
-            "trigger time": 12.43,
-            "text": "Second slide",
-            "label": ""
-          }
+          {"enabled": true, "notes": "", "trigger time": 0.0,  "text": "Opening words", "label": ""},
+          {"enabled": true, "notes": "", "trigger time": 12.43, "text": "Second slide",  "label": ""}
+        ]
+      }
+    ]
+  }
+}
+```
+
+### slide-label mode
+
+```json
+{
+  "presentation": {
+    "id": {
+      "uuid": "...",
+      "name": "My Presentation",
+      "index": 0,
+      "audio": "audio/sermon.wav"
+    },
+    "groups": [
+      {
+        "name": "",
+        "color": null,
+        "slides": [
+          {"enabled": true, "notes": "", "start time": 0.0,  "stop time": 12.43, "text": "Opening words", "label": ""},
+          {"enabled": true, "notes": "", "start time": 12.43, "stop time": 28.7,  "text": "Second slide",  "label": ""}
         ]
       }
     ]

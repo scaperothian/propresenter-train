@@ -1,0 +1,238 @@
+{
+  "presentation": {
+    "id": {
+      "uuid": "C4F878BA-60EF-40CF-9500-7124FC891C87",
+      "name": "Drive-2",
+      "index": 47,
+      "audio": "../propresenter-dataset-gen/dataset/incubus/drive/studio_drive.wav"
+    },
+    "groups": [
+      {
+        "name": "Verse 1",
+        "color": {
+          "red": 0.0,
+          "green": 0.46666666865348816,
+          "blue": 0.800000011920929,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "\u201cSometimes\u201d\n\"I feel the fear of\"\n\"Uncertainty stinging clear\"",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              0.0
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "\"And I cant help but ask myself\"\n\"How much Ill let the fear\"\n\"Take the wheel and steer\"",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              30.669
+            ]
+          }
+        ],
+        "uuid": "D1FB091B-42D2-4311-844E-FEA48A47440C"
+      },
+      {
+        "name": "PreChorus",
+        "color": {
+          "red": 0.800000011920929,
+          "green": 0.16078431904315948,
+          "blue": 0.545098066329956,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "\u201cIt\u2019s driven me before\u201d\n\"and seems to have a vague\"\n\"Haunting mass appeal\"",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              41.941
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "\u201cBut lately I\u2019m beginning to find that I\u201d\n\u201cShould be the one behind the wheel\u201d",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              53.638
+            ]
+          }
+        ],
+        "uuid": "D548A9E1-4CCB-4049-AC5C-7930E92553D4"
+      },
+      {
+        "name": "Chorus",
+        "color": {
+          "red": 0.800000011920929,
+          "green": 0.0,
+          "blue": 0.30588236451148987,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "\"Whatever tomorrow brings Ill be there\"\n\"With open arms and open eyes yeah\"",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              63.849,
+              128.285,
+              181.724
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "\"Whatever tomorrow brings Ill be there\"\n\u201cI\u2019ll be there, yeah\u201d",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              74.248,
+              138.015,
+              193.967
+            ]
+          }
+        ],
+        "uuid": "65429796-C5C4-46EF-B355-37C6E6593E81"
+      },
+      {
+        "name": "Verse 2",
+        "color": {
+          "red": 0.0,
+          "green": 0.3490196168422699,
+          "blue": 0.6000000238418579,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "\"So if I decide to waiver my\"\n\"Chance to be one of\"\n\"The hive\"",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              85.615
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "\"Will I choose water over wine\"\n\"And hold my own and drive\"\n\"Aah ah ooh\"",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              94.532
+            ]
+          }
+        ],
+        "uuid": "3BA319E0-CC5C-4B77-BF10-9A3BB717BD4C"
+      },
+      {
+        "name": "PreChorus 2",
+        "color": {
+          "red": 0.800000011920929,
+          "green": 0.16078431904315948,
+          "blue": 0.545098066329956,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "\u201cIts driven me before,\u201d\n\u201cand it seems to be the way\u201d\n\"That everyone else gets around\"",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              105.769
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "\u201cBut lately I\u2019m beginning to find that\u201d\n\u201cWhen I drive myself my light is found\"",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              117.17
+            ]
+          }
+        ],
+        "uuid": "13253D8B-B51E-4423-872F-A3ACFB642830"
+      },
+      {
+        "name": "Bridge",
+        "color": {
+          "red": 0.4627451002597809,
+          "green": 0.0,
+          "blue": 0.800000011920929,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "\"Would you choose water over wine\"\n\"Hold the wheel and drive\"",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              168.966
+            ]
+          }
+        ],
+        "uuid": "933D0E60-05DA-49A8-B7FB-07241C0E05B9"
+      }
+    ],
+    "has_timeline": false,
+    "presentation_path": "/Users/das/Documents/ProPresenter/Libraries/Default/Drive-2.pro",
+    "destination": "presentation",
+    "arrangements": [],
+    "current_arrangement": "",
+    "type": "standard",
+    "is_authorized": true
+  }
+}
