@@ -20,6 +20,7 @@ pytest-mock = "*"
 
 [tool.poetry.scripts]
 propresenter-train = "propresenter_train.main:main"
+propresenter-train-playback = "propresenter_train.playback_main:main"
 
 [build-system]
 requires = ["poetry-core"]

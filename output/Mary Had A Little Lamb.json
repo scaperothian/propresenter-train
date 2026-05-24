@@ -1,0 +1,53 @@
+{
+  "presentation": {
+    "id": {
+      "uuid": "A90E9E20-E7F3-45D9-B632-1C34CCAA12DF",
+      "name": "Mary Had A Little Lamb",
+      "index": 20,
+      "audio": "/Users/das/propresenter-train/audio/mary_had_a_little_lamb_song.wav"
+    },
+    "groups": [
+      {
+        "name": "",
+        "color": null,
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Mary had a little lamb\nLittle lamb, little lamb\nMary had a little lamb\nHer fleece was white as snow",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              0.0
+            ],
+            "stop time": [
+              10.799
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Everywhere that Mary went\nMary went, Mary went\nEverywhere that Mary went\nHer lamb was sure to go",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              10.799
+            ],
+            "stop time": [
+              22.954
+            ]
+          }
+        ]
+      }
+    ],
+    "has_timeline": false,
+    "presentation_path": "/Users/das/Documents/ProPresenter/Libraries/Default/Mary Had A Little Lamb.pro",
+    "destination": "presentation"
+  }
+}

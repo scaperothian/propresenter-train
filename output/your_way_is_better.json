@@ -1,0 +1,449 @@
+{
+  "presentation": {
+    "id": {
+      "uuid": "D47B729D-B08A-4473-85B6-9CBADBA9AE1F",
+      "name": "Your Way Is Better",
+      "index": 21,
+      "audio": "/Users/das/propresenter-train/audio/forrest_frank_your_ways_better.mp3"
+    },
+    "groups": [
+      {
+        "name": "Verse 1",
+        "color": {
+          "red": 0.0,
+          "green": 0.46666666865348816,
+          "blue": 0.800000011920929,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "When I\u2019m overwhelmed within\nFrom the weight of all my sin",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              0.0
+            ],
+            "stop time": [
+              14.069
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "I need a friend to call my own\nI need a house to call my home",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              14.069
+            ],
+            "stop time": [
+              20.586
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "When I\u2019m broken down inside\nAnd there\u2019s nowhere else to hide",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              20.586
+            ],
+            "stop time": [
+              27.565
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "I need a place where I feel known\nCan someone help me?",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              27.565
+            ],
+            "stop time": [
+              33.609
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Then I hear your reply\nBringing teardrops to my eyes\nSaying I\u2019m not alone",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              33.609
+            ],
+            "stop time": [
+              45.487
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Chorus",
+        "color": {
+          "red": 0.800000011920929,
+          "green": 0.0,
+          "blue": 0.30588236451148987,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Oh Lord I need you now more than ever\nWould you put my heart back together?",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              45.487
+            ],
+            "stop time": [
+              52.91
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "I searched the world till my head hurt\nJost to find out Your way\u2019s better",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              52.91
+            ],
+            "stop time": [
+              59.395
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Oh-oh, Your way\u2019s better\nOh-oh, Your way\u2019s better",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              59.395
+            ],
+            "stop time": [
+              66.501
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Oh-oh, Your way\u2019s better\nJesus, Your way\u2019s better",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              66.501
+            ],
+            "stop time": [
+              72.631
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Verse 2",
+        "color": {
+          "red": 0.0,
+          "green": 0.3490196168422699,
+          "blue": 0.6000000238418579,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Lord, I\u2019m so thankful for the ways that You Blessed me\nEverything You say making waves like a jet ski",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              72.631
+            ],
+            "stop time": [
+              79.149
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "You love every part of me, even when I was messy\nNow I see the art in Your beauty",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              79.149
+            ],
+            "stop time": [
+              84.701
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "So, I can finally sing out Jehovah-Jireh, Provider\nYour way always gets me higher",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              84.701
+            ],
+            "stop time": [
+              92.411
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Even on my darkest days, You\u2019re my lighter \nMy Messiah",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              92.411
+            ],
+            "stop time": [
+              97.581
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Chorus 2",
+        "color": {
+          "red": 0.6000000238418579,
+          "green": 0.0,
+          "blue": 0.23137255012989044,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Oh Lord I need you now more than ever\nWould you put my heart back together?",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              97.581
+            ],
+            "stop time": [
+              105.316
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "I searched the world till my head hurt\nJust to find out Your way\u2019s better",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              105.316
+            ],
+            "stop time": [
+              111.783
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Oh-oh, Your way\u2019s better\nOh-oh, Your way\u2019s better",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              111.783
+            ],
+            "stop time": [
+              118.767
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Oh-oh, Your way\u2019s better\nJesus",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              118.767
+            ],
+            "stop time": [
+              125.095
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Chorus 1",
+        "color": {
+          "red": 0.800000011920929,
+          "green": 0.0,
+          "blue": 0.30588236451148987,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Oh Lord I need you now more than ever\nWould you put my heart back together?",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              125.095
+            ],
+            "stop time": [
+              131.401
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "I searched the world till my head hurt\nJust to find out Your way\u2019s better",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              131.401
+            ],
+            "stop time": [
+              137.945
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Oh-oh, Your way\u2019s better\nOh-oh, Your way\u2019s better",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              137.945
+            ],
+            "stop time": [
+              145.105
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Oh-oh, Your way\u2019s better\nJesus, Your way\u2019s better",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              145.105
+            ],
+            "stop time": [
+              151.599
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Outro",
+        "color": {
+          "red": 0.4941176474094391,
+          "green": 0.4627451002597809,
+          "blue": 0.09803921729326248,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Oh-oh, Your way\u2019s better\nOh-oh, Your way\u2019s better\nOh-oh, Your way\u2019s better",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              151.599
+            ],
+            "stop time": [
+              161.578
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "It\u2019s better, better, better.  \nIt\u2019s better, better, better.  \nIt\u2019s better, better, better.  \nIt\u2019s better, better, better than the rest  ",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "start time": [
+              161.578
+            ],
+            "stop time": [
+              198.089
+            ]
+          }
+        ]
+      }
+    ],
+    "has_timeline": false,
+    "presentation_path": "/Users/das/Documents/ProPresenter/Libraries/Default/Your Way Is Better.pro",
+    "destination": "presentation"
+  }
+}

@@ -20,7 +20,9 @@
               "width": 1920,
               "height": 1080
             },
-            "trigger time": 0.0
+            "trigger time": [
+              0.0
+            ]
           },
           {
             "enabled": true,
@@ -31,7 +33,9 @@
               "width": 1920,
               "height": 1080
             },
-            "trigger time": 2.752
+            "trigger time": [
+              2.752
+            ]
           },
           {
             "enabled": true,
@@ -42,7 +46,9 @@
               "width": 1920,
               "height": 1080
             },
-            "trigger time": 5.058
+            "trigger time": [
+              5.058
+            ]
           },
           {
             "enabled": true,
@@ -53,7 +59,9 @@
               "width": 1920,
               "height": 1080
             },
-            "trigger time": 7.733
+            "trigger time": [
+              7.733
+            ]
           },
           {
             "enabled": true,
@@ -64,7 +72,9 @@
               "width": 1920,
               "height": 1080
             },
-            "trigger time": 11.485
+            "trigger time": [
+              11.485
+            ]
           }
         ]
       }
