@@ -14,6 +14,9 @@ per-slide timing keys added. Supports two modes:
 
 In both modes `presentation.id.audio` is added with the path of the training audio file.
 
+All timing values are **lists of floats** (seconds since audio start) to support
+multiple triggers per slide within a single session.
+
 The resulting JSON is the **gold copy** used to evaluate automated slide-cueing
 systems (propresenter-speech, etc.) against the same audio file.
 
@@ -23,6 +26,8 @@ systems (propresenter-speech, etc.) against the same audio file.
 |---------|--------|
 | Training session + JSON build | `src/propresenter_train/trainer.py` — `TrainingSession` |
 | CLI entry point | `src/propresenter_train/main.py` |
+| Playback engine | `src/propresenter_train/playback.py` — `PlaybackSession`, `load_cues()` |
+| Playback CLI entry point | `src/propresenter_train/playback_main.py` |
 | Mode constants | `trainer.py` — `MODE_TRIGGER_LABEL`, `MODE_SLIDE_LABEL` |
 | ProPresenter HTTP client | `../propresenter-client/src/propresenter_client/main.py` — imported via path dep |
 
@@ -39,10 +44,18 @@ client's interactive mode.
   identically in both the in-memory timing dicts and the output JSON.
 - **Starting slide** — the active slide at audio-start is automatically recorded at
   `t = 0.0` in both modes.
-- **slide-label invariant** — `stop_time[X]` always equals `start_time[X+1]`; a
-  single keypress stamps both simultaneously.
+- **slide-label invariant** — `stop_time[X][-1]` always equals `start_time[X+1][-1]`;
+  a single keypress appends the same timestamp to both lists simultaneously.
+- **slide-label end fallback** — if the session ends before the last active slide
+  receives a stop time, `build_output()` appends the audio duration automatically.
+- **Multiple triggers** — revisiting a slide appends a new timestamp to the list rather
+  than overwriting, preserving all training events.
 - **Untriggered slides** — slides never reached by the trainer have no timing keys
   in the output JSON.
+- **Audio device** — startup prints the output device name; `--device` overrides the
+  system default. If `sd.play()` raises, a clear error is shown with remediation hint.
+- **Playback precision** — `PlaybackSession` sleeps to within 50 ms of each cue time
+  then busy-polls the remainder, achieving ~1 ms accuracy for slide trigger replay.
 
 ## Project conventions
 
@@ -68,11 +81,18 @@ poetry run propresenter-train audio/pledge.wav "Pledge of Allegiance" --output-d
 # Skip activating the presentation (if already active in ProPresenter)
 poetry run propresenter-train audio/service.wav "Service" --no-activate
 
+# Specify audio output device
+poetry run propresenter-train audio/sermon.wav "Sunday Sermon" --device 0
+
 # Remote ProPresenter host
 poetry run propresenter-train audio/worship.wav "Worship" --host 192.168.1.10
 
 # Search a non-default library
 poetry run propresenter-train audio/song.wav "Amazing Grace" --library Songs
+
+# Play back a gold-copy JSON to evaluate timing quality
+poetry run propresenter-train-playback output/sermon.json
+poetry run propresenter-train-playback output/sermon.json --no-activate --device 1
 ```
 
 ## Running tests
@@ -113,8 +133,8 @@ Tests are unit-level — no audio hardware, no ProPresenter server required.
         "name": "",
         "color": null,
         "slides": [
-          {"enabled": true, "notes": "", "trigger time": 0.0,  "text": "Opening words", "label": ""},
-          {"enabled": true, "notes": "", "trigger time": 12.43, "text": "Second slide",  "label": ""}
+          {"enabled": true, "notes": "", "trigger time": [0.0],   "text": "Opening words", "label": ""},
+          {"enabled": true, "notes": "", "trigger time": [12.43], "text": "Second slide",  "label": ""}
         ]
       }
     ]
@@ -138,8 +158,8 @@ Tests are unit-level — no audio hardware, no ProPresenter server required.
         "name": "",
         "color": null,
         "slides": [
-          {"enabled": true, "notes": "", "start time": 0.0,  "stop time": 12.43, "text": "Opening words", "label": ""},
-          {"enabled": true, "notes": "", "start time": 12.43, "stop time": 28.7,  "text": "Second slide",  "label": ""}
+          {"enabled": true, "notes": "", "start time": [0.0],   "stop time": [12.43], "text": "Opening words", "label": ""},
+          {"enabled": true, "notes": "", "start time": [12.43], "stop time": [28.7],  "text": "Second slide",  "label": ""}
         ]
       }
     ]
