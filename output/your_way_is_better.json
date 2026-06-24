@@ -4,7 +4,9 @@
       "uuid": "D47B729D-B08A-4473-85B6-9CBADBA9AE1F",
       "name": "Your Way Is Better",
       "index": 21,
-      "audio": "/Users/das/propresenter-train/audio/forrest_frank_your_ways_better.mp3"
+      "audio": "/Users/das/propresenter-train/audio/forrest_frank_your_ways_better.mp3",
+      "url": "",
+      "method": "manual"
     },
     "groups": [
       {

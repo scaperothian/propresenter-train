@@ -7,6 +7,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
+from propresenter_train.models import METHOD_MANUAL
 from propresenter_train.trainer import (
     MODE_SLIDE_LABEL,
     MODE_TRIGGER_LABEL,
@@ -63,6 +64,33 @@ class TestTriggerLabelMode:
 
         output = session.build_output()
         assert output["presentation"]["id"]["audio"] == "audio/test.wav"
+
+    def test_url_and_method_injected_into_id(self):
+        session = _make_session()
+        session._session_start = time.perf_counter()
+
+        output = session.build_output()
+        id_obj = output["presentation"]["id"]
+        assert id_obj["url"] == ""
+        assert id_obj["method"] == METHOD_MANUAL
+
+    def test_custom_url_and_method(self):
+        controller = MagicMock()
+        controller.get_slide_index.return_value = 0
+        session = TrainingSession(
+            controller=controller,
+            presentation_details=PRESENTATION_DETAILS,
+            audio_path=Path("audio/test.wav"),
+            mode=MODE_TRIGGER_LABEL,
+            url="https://youtu.be/abc123",
+            method="captions",
+        )
+        session._session_start = time.perf_counter()
+
+        output = session.build_output()
+        id_obj = output["presentation"]["id"]
+        assert id_obj["url"] == "https://youtu.be/abc123"
+        assert id_obj["method"] == "captions"
 
     def test_trigger_times_are_lists(self):
         session = _make_session()

@@ -30,6 +30,8 @@ Use this when you want to know *when* each slide was cued.
 poetry run propresenter-train audio/sermon.wav "Sunday Sermon"
 # or explicitly:
 poetry run propresenter-train audio/sermon.wav "Sunday Sermon" --mode trigger-label
+# with source URL metadata:
+poetry run propresenter-train audio/sermon.wav "Sunday Sermon" --url "https://youtu.be/abc123"
 ```
 
 ### `slide-label`
@@ -79,6 +81,12 @@ poetry run propresenter-train audio/worship.wav "Worship" --host 192.168.1.10
 
 # Search a non-default library
 poetry run propresenter-train audio/song.wav "Amazing Grace" --library Songs
+
+# Attach a source URL (written to presentation.id.url)
+poetry run propresenter-train audio/song.wav "Amazing Grace" --url "https://youtu.be/abc123"
+
+# Override the timing method (manual is the default for this tool)
+poetry run propresenter-train audio/song.wav "Amazing Grace" --method manual
 ```
 
 ## Interactive commands during training
@@ -116,8 +124,16 @@ for trigger-label). All timestamps in each list are replayed in chronological or
 ## Output format
 
 The JSON mirrors the `/v1/presentation/{uuid}` ProPresenter API response.
-`presentation.id.audio` is always added. Timing values are **lists of floats**
-(seconds since audio start), which supports multiple triggers per slide.
+The following keys are always added to `presentation.id`:
+
+| Key | Description |
+|-----|-------------|
+| `audio` | Path to the training audio file |
+| `url` | Source URL for the audio (e.g. YouTube link); empty string if not provided |
+| `method` | How timestamps were produced: `manual`, `captions`, or `model` |
+
+Timing values are **lists of floats** (seconds since audio start), which supports
+multiple triggers per slide.
 
 ### `trigger-label` output
 
@@ -128,7 +144,9 @@ The JSON mirrors the `/v1/presentation/{uuid}` ProPresenter API response.
       "uuid": "7A465FF0-FF42-4785-82F1-5CF0DC136BAE",
       "name": "The Pledge of Allegiance",
       "index": 19,
-      "audio": "audio/pledge_of_allegiance.wav"
+      "audio": "audio/pledge_of_allegiance.wav",
+      "url": "",
+      "method": "manual"
     },
     "groups": [
       {
@@ -165,7 +183,9 @@ The JSON mirrors the `/v1/presentation/{uuid}` ProPresenter API response.
       "uuid": "7A465FF0-FF42-4785-82F1-5CF0DC136BAE",
       "name": "The Pledge of Allegiance",
       "index": 19,
-      "audio": "audio/pledge_of_allegiance.wav"
+      "audio": "audio/pledge_of_allegiance.wav",
+      "url": "",
+      "method": "manual"
     },
     "groups": [
       {

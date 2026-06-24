@@ -4,7 +4,9 @@
       "uuid": "D47B729D-B08A-4473-85B6-9CBADBA9AE1F",
       "name": "Your Way Is Better",
       "index": 21,
-      "audio": "/Users/das/propresenter-train/audio/forrest_frank_your_ways_better.mp3"
+      "audio": "/Users/das/propresenter-train/audio/forrest_frank_your_ways_better.mp3",
+      "url": "",
+      "method": "manual"
     },
     "groups": [
       {
@@ -25,11 +27,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               0.0
-            ],
-            "stop time": [
-              14.069
             ]
           },
           {
@@ -41,11 +40,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               14.069
-            ],
-            "stop time": [
-              20.586
             ]
           },
           {
@@ -57,11 +53,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               20.586
-            ],
-            "stop time": [
-              27.565
             ]
           },
           {
@@ -73,11 +66,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               27.565
-            ],
-            "stop time": [
-              33.609
             ]
           },
           {
@@ -89,11 +79,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               33.609
-            ],
-            "stop time": [
-              45.487
             ]
           }
         ]
@@ -116,11 +103,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               45.487
-            ],
-            "stop time": [
-              52.91
             ]
           },
           {
@@ -132,11 +116,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               52.91
-            ],
-            "stop time": [
-              59.395
             ]
           },
           {
@@ -148,11 +129,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               59.395
-            ],
-            "stop time": [
-              66.501
             ]
           },
           {
@@ -164,11 +142,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               66.501
-            ],
-            "stop time": [
-              72.631
             ]
           }
         ]
@@ -191,11 +166,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               72.631
-            ],
-            "stop time": [
-              79.149
             ]
           },
           {
@@ -207,11 +179,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               79.149
-            ],
-            "stop time": [
-              84.701
             ]
           },
           {
@@ -223,11 +192,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               84.701
-            ],
-            "stop time": [
-              92.411
             ]
           },
           {
@@ -239,11 +205,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               92.411
-            ],
-            "stop time": [
-              97.581
             ]
           }
         ]
@@ -266,11 +229,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               97.581
-            ],
-            "stop time": [
-              105.316
             ]
           },
           {
@@ -282,11 +242,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               105.316
-            ],
-            "stop time": [
-              111.783
             ]
           },
           {
@@ -298,11 +255,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               111.783
-            ],
-            "stop time": [
-              118.767
             ]
           },
           {
@@ -314,11 +268,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               118.767
-            ],
-            "stop time": [
-              125.095
             ]
           }
         ]
@@ -341,11 +292,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               125.095
-            ],
-            "stop time": [
-              131.401
             ]
           },
           {
@@ -357,11 +305,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               131.401
-            ],
-            "stop time": [
-              137.945
             ]
           },
           {
@@ -373,11 +318,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               137.945
-            ],
-            "stop time": [
-              145.105
             ]
           },
           {
@@ -389,11 +331,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               145.105
-            ],
-            "stop time": [
-              151.599
             ]
           }
         ]
@@ -416,11 +355,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               151.599
-            ],
-            "stop time": [
-              161.578
             ]
           },
           {
@@ -432,11 +368,8 @@
               "width": 1920,
               "height": 1080
             },
-            "start time": [
+            "trigger time": [
               161.578
-            ],
-            "stop time": [
-              198.089
             ]
           }
         ]

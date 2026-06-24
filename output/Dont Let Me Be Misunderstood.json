@@ -1,0 +1,200 @@
+{
+  "presentation": {
+    "id": {
+      "uuid": "3F33ACB3-C30A-4ADA-836B-DBA0B7549585",
+      "name": "Dont Let Me Be Misunderstood",
+      "index": 48,
+      "audio": "../propresenter-dataset/the-animals/dont-let-me-be-misunderstood/studio_dont_let_me_be_misunderstood.wav",
+      "url": "",
+      "method": "manual"
+    },
+    "groups": [
+      {
+        "name": "Verse 1",
+        "color": {
+          "red": 0.0,
+          "green": 0.46666666865348816,
+          "blue": 0.800000011920929,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Baby, do you understand me now?\nSometimes I feel a little mad",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              0.0
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "But don't you know that no one alive\nCan always be an angel?\nWhen things go wrong I seem to be bad",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              26.054
+            ]
+          }
+        ],
+        "uuid": "F1E86980-B170-4C3A-9AF2-18D1D814F24C"
+      },
+      {
+        "name": "Chorus",
+        "color": {
+          "red": 0.800000011920929,
+          "green": 0.0,
+          "blue": 0.30588236451148987,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "But I'm just a soul \nwhose intentions are good\nOh Lord, please don't let me be misunderstood",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              34.906,
+              68.779,
+              113.465
+            ]
+          }
+        ],
+        "uuid": "E89715DA-3117-4C9F-97FB-69B00B3B383F"
+      },
+      {
+        "name": "Verse 2",
+        "color": {
+          "red": 0.0,
+          "green": 0.3490196168422699,
+          "blue": 0.6000000238418579,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Baby, sometimes I'm so carefree, \nWith a joy that's hard to hide",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              50.874
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "And sometimes, \nit seems that all I have do is worry\nAnd then you're bound \nto see my other side",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              59.932
+            ]
+          }
+        ],
+        "uuid": "B69E38B0-3E4F-4A22-882F-C5C0D8AA7DD9"
+      },
+      {
+        "name": "Bridge",
+        "color": {
+          "red": 0.4627451002597809,
+          "green": 0.0,
+          "blue": 0.800000011920929,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "If I seem edgy, I want you to know, \nThat I never mean to take it out on you",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              78.996
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Life has its problems, and I get my share, \nAnd that's one thing I'd never mean to do\n'Cause I love you",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              87.518
+            ]
+          }
+        ],
+        "uuid": "1D635B10-A219-40BC-AEAC-6485E308AFE3"
+      },
+      {
+        "name": "Verse 3",
+        "color": {
+          "red": 0.0,
+          "green": 0.23529411852359772,
+          "blue": 0.4000000059604645,
+          "alpha": 1.0
+        },
+        "slides": [
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Oh, oh, oh, baby, \ndon't you know I'm human?\nHave thoughts like any other one",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              97.401
+            ]
+          },
+          {
+            "enabled": true,
+            "notes": "",
+            "text": "Sometimes I find myself long regretting\nSome foolish thing, some little simple thing I've done",
+            "label": "",
+            "size": {
+              "width": 1920,
+              "height": 1080
+            },
+            "trigger time": [
+              105.386
+            ]
+          }
+        ],
+        "uuid": "24BE452F-C704-4BE8-B707-2C232960E247"
+      }
+    ],
+    "has_timeline": false,
+    "presentation_path": "/Users/das/Documents/ProPresenter/Libraries/Default/Dont Let Me Be Misunderstood.pro",
+    "destination": "presentation",
+    "arrangements": [],
+    "current_arrangement": "",
+    "type": "standard",
+    "is_authorized": true
+  }
+}
