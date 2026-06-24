@@ -11,7 +11,6 @@ so slides triggered or labelled multiple times during training fire multiple tim
 during playback.
 """
 
-import json
 import time
 from pathlib import Path
 from typing import Optional
@@ -20,6 +19,8 @@ import sounddevice as sd
 import soundfile as sf
 
 from propresenter_client.main import ProPresenterController
+
+from .models import PresentationFile
 
 _TIMING_KEY_PRIORITY = ("start time", "trigger time")
 
@@ -75,26 +76,25 @@ class PlaybackSession:
         self.json_path = json_path
         self.device = device
 
-        self.data = json.loads(json_path.read_text())
+        raw = json_path.read_text()
+        self._model = PresentationFile.model_validate_json(raw)
 
-        id_obj = self.data.get("presentation", {}).get("id", {})
-        audio_str = id_obj.get("audio") if isinstance(id_obj, dict) else None
-        if not audio_str:
+        if not self._model.presentation.id.audio:
             raise ValueError("JSON does not contain presentation.id.audio")
 
-        self.audio_path = Path(audio_str)
+        self.audio_path = Path(self._model.presentation.id.audio)
         if not self.audio_path.is_file():
             raise FileNotFoundError(f"Audio file not found: {self.audio_path}")
 
-        self.timing_key, self.cues = load_cues(self.data)
+        self.timing_key, self.cues = load_cues(self._model.model_dump(by_alias=True))
 
     @property
     def presentation_name(self) -> str:
-        return self.data.get("presentation", {}).get("id", {}).get("name", "Unknown")
+        return self._model.presentation.id.name or "Unknown"
 
     @property
     def presentation_uuid(self) -> Optional[str]:
-        return self.data.get("presentation", {}).get("id", {}).get("uuid")
+        return self._model.presentation.id.uuid
 
     @staticmethod
     def _fmt_time(t: float) -> str:

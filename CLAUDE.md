@@ -12,7 +12,13 @@ per-slide timing keys added. Supports two modes:
 | `trigger-label` (default) | `--mode trigger-label` | `"trigger time"` — when the slide was cued |
 | `slide-label` | `--mode slide-label` | `"start time"` and `"stop time"` — audio section boundaries |
 
-In both modes `presentation.id.audio` is added with the path of the training audio file.
+In all modes these keys are added to `presentation.id`:
+
+| Key | Description |
+|-----|-------------|
+| `audio` | Path to the training audio file |
+| `url` | Source URL (e.g. YouTube link); empty string by default |
+| `method` | How timestamps were made: `manual` \| `captions` \| `model`; defaults to `manual` |
 
 All timing values are **lists of floats** (seconds since audio start) to support
 multiple triggers per slide within a single session.
@@ -29,6 +35,7 @@ systems (propresenter-speech, etc.) against the same audio file.
 | Playback engine | `src/propresenter_train/playback.py` — `PlaybackSession`, `load_cues()` |
 | Playback CLI entry point | `src/propresenter_train/playback_main.py` |
 | Mode constants | `trainer.py` — `MODE_TRIGGER_LABEL`, `MODE_SLIDE_LABEL` |
+| Method constants | `trainer.py` — `METHOD_MANUAL`, `METHOD_CAPTIONS`, `METHOD_MODEL` |
 | ProPresenter HTTP client | `../propresenter-client/src/propresenter_client/main.py` — imported via path dep |
 
 `TrainingSession` reuses `_get_command()` and `ProPresenterController` directly from
@@ -90,6 +97,9 @@ poetry run propresenter-train audio/worship.wav "Worship" --host 192.168.1.10
 # Search a non-default library
 poetry run propresenter-train audio/song.wav "Amazing Grace" --library Songs
 
+# Attach a source URL to the output JSON
+poetry run propresenter-train audio/sermon.wav "Sunday Sermon" --url "https://youtu.be/abc123"
+
 # Play back a gold-copy JSON to evaluate timing quality
 poetry run propresenter-train-playback output/sermon.json
 poetry run propresenter-train-playback output/sermon.json --no-activate --device 1
@@ -117,6 +127,9 @@ Tests are unit-level — no audio hardware, no ProPresenter server required.
 
 ## Output JSON shape
 
+`presentation.id` always contains `audio`, `url`, and `method` in addition to
+the fields returned by the ProPresenter API.
+
 ### trigger-label mode
 
 ```json
@@ -126,7 +139,9 @@ Tests are unit-level — no audio hardware, no ProPresenter server required.
       "uuid": "...",
       "name": "My Presentation",
       "index": 0,
-      "audio": "audio/sermon.wav"
+      "audio": "audio/sermon.wav",
+      "url": "",
+      "method": "manual"
     },
     "groups": [
       {
@@ -151,7 +166,9 @@ Tests are unit-level — no audio hardware, no ProPresenter server required.
       "uuid": "...",
       "name": "My Presentation",
       "index": 0,
-      "audio": "audio/sermon.wav"
+      "audio": "audio/sermon.wav",
+      "url": "",
+      "method": "manual"
     },
     "groups": [
       {

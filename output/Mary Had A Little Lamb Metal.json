@@ -4,7 +4,9 @@
       "uuid": "978AADDD-58BF-45F9-8DDC-A0CA91CF073A",
       "name": "Mary Had A Little Lamb Metal",
       "index": 19,
-      "audio": "/Users/das/propresenter-train/audio/mary_had_a_little_lamb_metal.wav"
+      "audio": "/Users/das/propresenter-train/audio/mary_had_a_little_lamb_metal.wav",
+      "url": "",
+      "method": "manual"
     },
     "groups": [
       {

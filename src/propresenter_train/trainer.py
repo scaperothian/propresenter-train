@@ -17,7 +17,6 @@ In both modes the output JSON mirrors the /v1/presentation/{uuid} API shape and
 adds presentation.id.audio with the path of the training audio file.
 """
 
-import copy
 import json
 import sys
 import time
@@ -28,6 +27,8 @@ import sounddevice as sd
 import soundfile as sf
 
 from propresenter_client.main import ProPresenterController, _get_command
+
+from .models import METHOD_MANUAL, PresentationFile
 
 MODE_TRIGGER_LABEL = "trigger-label"
 MODE_SLIDE_LABEL = "slide-label"
@@ -42,11 +43,15 @@ class TrainingSession:
         presentation_details: dict,
         audio_path: Path,
         mode: str = MODE_TRIGGER_LABEL,
+        url: str = "",
+        method: str = METHOD_MANUAL,
     ):
         self.controller = controller
         self.presentation_details = presentation_details
         self.audio_path = audio_path
         self.mode = mode
+        self.url = url
+        self.method = method
 
         self._trigger_times: dict[int, list[float]] = {}   # trigger-label mode
         self._start_times: dict[int, list[float]] = {}     # slide-label mode
@@ -221,52 +226,30 @@ class TrainingSession:
     # ------------------------------------------------------------------
 
     def build_output(self) -> dict:
-        """Return an annotated deep-copy of the presentation details JSON.
-
-        Additions versus the raw API response:
-        - presentation.id.audio       — path of the training audio file
-        - trigger-label mode: "trigger time" list on each triggered slide
-        - slide-label mode:   "start time" and/or "stop time" lists on each labelled slide;
-                              the last active slide always gets a stop time (audio duration)
-                              if none was recorded before the session ended.
-        """
         if self.mode == MODE_SLIDE_LABEL and self._current_index not in self._stop_times:
             self._append(self._stop_times, self._current_index, self._audio_duration)
 
-        output = copy.deepcopy(self.presentation_details)
+        model = PresentationFile.model_validate(self.presentation_details)
+        model.presentation.id.audio = str(self.audio_path)
+        model.presentation.id.url = self.url
+        model.presentation.id.method = self.method
 
-        pres = output.get("presentation")
-        if isinstance(pres, dict):
-            id_obj = pres.get("id")
-            if isinstance(id_obj, dict):
-                id_obj["audio"] = str(self.audio_path)
+        slide_index = 0
+        for group in model.presentation.groups:
+            for slide in group.slides:
+                for key in ("trigger time", "start time", "stop time"):
+                    slide.model_extra.pop(key, None)
+                if self.mode == MODE_SLIDE_LABEL:
+                    if slide_index in self._start_times:
+                        slide.model_extra["start time"] = self._start_times[slide_index]
+                    if slide_index in self._stop_times:
+                        slide.model_extra["stop time"] = self._stop_times[slide_index]
+                else:
+                    if slide_index in self._trigger_times:
+                        slide.model_extra["trigger time"] = self._trigger_times[slide_index]
+                slide_index += 1
 
-        self._annotate(output, counter=[0])
-        return output
-
-    def _annotate(self, node: object, counter: list[int]) -> None:
-        """Recursively mirror find_slides() traversal; inject timing lists in place."""
-        if isinstance(node, dict):
-            slides = node.get("slides")
-            if isinstance(slides, list):
-                for slide in slides:
-                    idx = counter[0]
-                    if isinstance(slide, dict):
-                        if self.mode == MODE_SLIDE_LABEL:
-                            if idx in self._start_times:
-                                slide["start time"] = self._start_times[idx]
-                            if idx in self._stop_times:
-                                slide["stop time"] = self._stop_times[idx]
-                        else:
-                            if idx in self._trigger_times:
-                                slide["trigger time"] = self._trigger_times[idx]
-                    counter[0] += 1
-                return
-            for value in node.values():
-                self._annotate(value, counter)
-        elif isinstance(node, list):
-            for item in node:
-                self._annotate(item, counter)
+        return model.model_dump(by_alias=True)
 
     # ------------------------------------------------------------------
     # Persistence
