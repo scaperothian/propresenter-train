@@ -19,6 +19,7 @@ In all modes these keys are added to `presentation.id`:
 | `audio` | Path to the training audio file — absolute or relative to the JSON file's directory |
 | `url` | Source URL (e.g. YouTube link); empty string by default |
 | `method` | How timestamps were made: `manual` \| `captions` \| `model`; defaults to `manual` |
+| `version` | Generator version string written by upstream tools (e.g. slide-agent); empty string by default |
 
 All timing values are **lists of floats** (seconds since audio start) to support
 multiple triggers per slide within a single session.
@@ -69,6 +70,7 @@ client's interactive mode.
 - **Python 3.11+** — native `list[...]` / `dict[...]` / `X | Y` type hints.
 - **Poetry** for dependency management.  Run `poetry install` before anything.
 - **No comments** unless the WHY is non-obvious.
+- **Commits** — do not include `Co-Authored-By` or any session attribution lines in commit messages.
 
 ## Running the project
 

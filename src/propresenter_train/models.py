@@ -2,7 +2,7 @@
 Pydantic models for the propresenter-train gold-copy JSON format.
 
 The top-level shape mirrors the /v1/presentation/{uuid} ProPresenter API response
-with extra keys added to presentation.id (audio, url, method).
+with extra keys added to presentation.id (audio, url, method, version).
 
 All ProPresenter API fields not explicitly modelled here pass through via
 extra="allow" so the output JSON faithfully reflects the original API response.
@@ -28,6 +28,7 @@ class PresentationId(BaseModel):
     audio: str = ""
     url: str = ""
     method: str = METHOD_MANUAL
+    version: str = ""
 
 
 class Slide(BaseModel):
