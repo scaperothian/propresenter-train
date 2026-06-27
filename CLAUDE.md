@@ -16,7 +16,7 @@ In all modes these keys are added to `presentation.id`:
 
 | Key | Description |
 |-----|-------------|
-| `audio` | Path to the training audio file |
+| `audio` | Path to the training audio file — absolute or relative to the JSON file's directory |
 | `url` | Source URL (e.g. YouTube link); empty string by default |
 | `method` | How timestamps were made: `manual` \| `captions` \| `model`; defaults to `manual` |
 
@@ -103,6 +103,7 @@ poetry run propresenter-train audio/sermon.wav "Sunday Sermon" --url "https://yo
 # Play back a gold-copy JSON to evaluate timing quality
 poetry run propresenter-train-playback output/sermon.json
 poetry run propresenter-train-playback output/sermon.json --no-activate --device 1
+poetry run propresenter-train-playback output/sermon.json --library Songs
 ```
 
 ## Running tests

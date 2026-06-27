@@ -82,7 +82,10 @@ class PlaybackSession:
         if not self._model.presentation.id.audio:
             raise ValueError("JSON does not contain presentation.id.audio")
 
-        self.audio_path = Path(self._model.presentation.id.audio)
+        audio_path = Path(self._model.presentation.id.audio)
+        if not audio_path.is_absolute():
+            audio_path = json_path.parent / audio_path
+        self.audio_path = audio_path
         if not self.audio_path.is_file():
             raise FileNotFoundError(f"Audio file not found: {self.audio_path}")
 
@@ -102,8 +105,12 @@ class PlaybackSession:
         secs = t % 60
         return f"{mins:02d}:{secs:05.2f}"
 
-    def run(self) -> None:
-        """Play audio and fire slide triggers at recorded timestamps."""
+    def run(self, early_trigger_window: float = 0.2) -> None:
+        """Play audio and fire slide triggers at recorded timestamps.
+
+        early_trigger_window: seconds before the recorded cue time to fire the trigger.
+                              Compensates for ProPresenter slide rendering latency.
+        """
         audio_data, samplerate = sf.read(str(self.audio_path), dtype="float32")
         duration = len(audio_data) / samplerate
 
@@ -117,6 +124,7 @@ class PlaybackSession:
         print(f"Device       : {dev_name}")
         print(f"Timing key   : {self.timing_key}")
         print(f"Cues         : {len(self.cues)}")
+        print(f"Window       : {early_trigger_window * 1000:.0f} ms early")
         print("\nPress Ctrl+C to stop.\n")
 
         try:
@@ -129,22 +137,24 @@ class PlaybackSession:
 
         try:
             for timestamp, slide_num in self.cues:
-                # Sleep to within 50 ms of the target, then busy-poll the remainder
-                # so the trigger fires within ~1 ms of the recorded time.
-                sleep_for = timestamp - (time.perf_counter() - t0) - 0.05
+                fire_at = max(0.0, timestamp - early_trigger_window)
+                # Sleep to within 50 ms of the fire time, then busy-poll the remainder
+                # so the trigger fires within ~1 ms of the target.
+                sleep_for = fire_at - (time.perf_counter() - t0) - 0.05
                 if sleep_for > 0:
                     time.sleep(sleep_for)
-                while time.perf_counter() - t0 < timestamp:
+                while time.perf_counter() - t0 < fire_at:
                     pass
 
                 actual = time.perf_counter() - t0
-                self.controller.go_to_slide(slide_num)
+                ok = self.controller.go_to_slide(slide_num)
                 drift_ms = (actual - timestamp) * 1000
+                status = "" if ok else "  [TRIGGER FAILED]"
                 print(
                     f"  Slide {slide_num:>3}  "
-                    f"target +{self._fmt_time(timestamp)}  "
-                    f"actual +{self._fmt_time(actual)}  "
-                    f"({drift_ms:+.1f} ms)"
+                    f"cue +{self._fmt_time(timestamp)}  "
+                    f"fired +{self._fmt_time(actual)}  "
+                    f"({drift_ms:+.1f} ms){status}"
                 )
 
             remaining = duration - (time.perf_counter() - t0)

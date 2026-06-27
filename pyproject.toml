@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "propresenter-train"
-version = "0.1.0"
+version = "0.2.0"
 description = "Human-guided slide timing trainer for ProPresenter — plays an audio file and records slide trigger times as a gold-copy JSON for benchmarking automated systems"
 authors = ["scaperoth@berkeley.edu"]
 readme = "README.md"
