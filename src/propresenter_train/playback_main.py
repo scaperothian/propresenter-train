@@ -41,6 +41,12 @@ def _build_parser() -> argparse.ArgumentParser:
     conn.add_argument("--timeout", type=int, default=5, help="HTTP timeout (seconds)")
 
     parser.add_argument(
+        "--library",
+        default="Default",
+        metavar="NAME",
+        help="Library to search for the presentation (used to resolve a fresh UUID)",
+    )
+    parser.add_argument(
         "--no-activate",
         action="store_true",
         dest="no_activate",
@@ -52,6 +58,14 @@ def _build_parser() -> argparse.ArgumentParser:
         default=None,
         metavar="INDEX",
         help="Output audio device index (run 'python -m sounddevice' to list; default: system default)",
+    )
+    parser.add_argument(
+        "--early-trigger-window",
+        type=float,
+        default=0.2,
+        metavar="SECONDS",
+        dest="early_trigger_window",
+        help="Fire each slide trigger this many seconds before the recorded cue time (default: 0.2)",
     )
     parser.add_argument(
         "--log-level",
@@ -94,14 +108,16 @@ def main() -> None:
         sys.exit(1)
 
     if not args.no_activate:
-        uuid = session.presentation_uuid
+        name = session.presentation_name
+        library_data = pro.get_library(args.library)
+        uuid = pro.find_presentation_uuid_by_name(name, library_data) if library_data else None
         if uuid and pro.activate_presentation(uuid):
-            print(f"Activated '{session.presentation_name}'")
+            print(f"Activated '{name}' (UUID: {uuid})")
         else:
-            print("Warning: Could not activate presentation — ensure it is already active in ProPresenter.")
+            print(f"Warning: Could not activate '{name}' — ensure it is already active in ProPresenter.")
 
     try:
-        session.run()
+        session.run(early_trigger_window=args.early_trigger_window)
         print("\nPlayback complete.")
     except KeyboardInterrupt:
         print("\n\nStopped.")

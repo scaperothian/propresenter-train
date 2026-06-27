@@ -130,7 +130,18 @@ class TestPlaybackSession:
 
     def test_audio_path_extracted(self):
         session = self._make_session(TRIGGER_LABEL_DATA)
-        assert str(session.audio_path) == "audio/test.wav"
+        # relative path in JSON is resolved against the JSON file's directory (/tmp)
+        assert session.audio_path == Path("/tmp") / "audio/test.wav"
+
+    def test_absolute_audio_path_unchanged(self):
+        data = {
+            "presentation": {
+                "id": {"uuid": "X", "name": "Y", "audio": "/absolute/path/song.wav"},
+                "groups": [{"slides": [{"trigger time": [1.0]}]}],
+            }
+        }
+        session = self._make_session(data)
+        assert session.audio_path == Path("/absolute/path/song.wav")
 
     def test_missing_audio_key_raises(self):
         data = {

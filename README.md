@@ -105,10 +105,10 @@ Plays back the audio from a saved JSON and fires slide triggers at the recorded
 timestamps, printing the target time, actual time, and drift for each cue.
 
 ```bash
-# Basic — audio path is read from the JSON
+# Basic — audio path is read from the JSON; presentation activated by name lookup
 poetry run propresenter-train-playback output/sermon.json
 
-# Skip activating the presentation
+# Skip activating the presentation (if already active in ProPresenter)
 poetry run propresenter-train-playback output/sermon.json --no-activate
 
 # Specify audio output device
@@ -116,10 +116,20 @@ poetry run propresenter-train-playback output/sermon.json --device 1
 
 # Remote ProPresenter
 poetry run propresenter-train-playback output/sermon.json --host 192.168.1.10
+
+# Search a non-default library for the presentation
+poetry run propresenter-train-playback output/sermon.json --library Songs
+
+# Fire triggers 0.5 s early (compensate for rendering latency; default 0.2 s)
+poetry run propresenter-train-playback output/sermon.json --early-trigger-window 0.5
 ```
 
 Auto-detects timing mode from the JSON (`"start time"` for slide-label, `"trigger time"`
 for trigger-label). All timestamps in each list are replayed in chronological order.
+
+The `audio` path in the JSON can be absolute or relative. A relative path is resolved
+against the directory containing the JSON file, so `song.json` with `"audio": "song.wav"`
+looks for `song.wav` in the same directory as `song.json`.
 
 ## Output format
 
@@ -128,7 +138,7 @@ The following keys are always added to `presentation.id`:
 
 | Key | Description |
 |-----|-------------|
-| `audio` | Path to the training audio file |
+| `audio` | Path to the training audio file — absolute (`/path/to/file.wav`) or relative to the JSON file's directory (`song.wav`, `../audio/song.wav`) |
 | `url` | Source URL for the audio (e.g. YouTube link); empty string if not provided |
 | `method` | How timestamps were produced: `manual`, `captions`, or `model` |
 
