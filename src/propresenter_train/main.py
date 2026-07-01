@@ -85,7 +85,7 @@ def _build_parser() -> argparse.ArgumentParser:
     meta_grp.add_argument(
         "--url",
         default="",
-        help="Source URL for the audio (e.g. YouTube link); written to presentation.id.url",
+        help="Source URL for the audio (e.g. YouTube link); written to presentation.id.audio_url",
     )
     meta_grp.add_argument(
         "--method",
@@ -166,7 +166,7 @@ def main() -> None:
         presentation_details=details,
         audio_path=audio_path,
         mode=args.mode,
-        url=args.url,
+        audio_url=args.url,
         method=args.method,
     )
 

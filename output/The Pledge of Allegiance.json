@@ -4,9 +4,15 @@
       "uuid": "7A465FF0-FF42-4785-82F1-5CF0DC136BAE",
       "name": "The Pledge of Allegiance",
       "index": 19,
-      "audio": "/Users/das/propresenter-speech/audio/pledge_of_allegiance.wav",
-      "url": "",
-      "method": "manual"
+      "audio_path": "/Users/das/propresenter-speech/audio/pledge_of_allegiance.wav",
+      "audio_description": "",
+      "audio_url": "",
+      "method": "manual",
+      "method_description": "",
+      "method_url": "",
+      "method_version": "",
+      "version": "",
+      "comment": ""
     },
     "groups": [
       {

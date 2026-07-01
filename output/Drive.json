@@ -4,9 +4,15 @@
       "uuid": "C4F878BA-60EF-40CF-9500-7124FC891C87",
       "name": "Drive-2",
       "index": 45,
-      "audio": "../propresenter-dataset/incubus/drive/live_drive.wav",
-      "url": "",
-      "method": "manual"
+      "audio_path": "../propresenter-dataset/incubus/drive/live_drive.wav",
+      "audio_description": "",
+      "audio_url": "",
+      "method": "manual",
+      "method_description": "",
+      "method_url": "",
+      "method_version": "",
+      "version": "",
+      "comment": ""
     },
     "groups": [
       {
