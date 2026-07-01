@@ -4,9 +4,15 @@
       "uuid": "A90E9E20-E7F3-45D9-B632-1C34CCAA12DF",
       "name": "Mary Had A Little Lamb",
       "index": 20,
-      "audio": "/Users/das/propresenter-train/audio/mary_had_a_little_lamb_song.wav",
-      "url": "",
-      "method": "manual"
+      "audio_path": "/Users/das/propresenter-train/audio/mary_had_a_little_lamb_song.wav",
+      "audio_description": "",
+      "audio_url": "",
+      "method": "manual",
+      "method_description": "",
+      "method_url": "",
+      "method_version": "",
+      "version": "",
+      "comment": ""
     },
     "groups": [
       {

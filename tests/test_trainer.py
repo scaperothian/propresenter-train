@@ -63,7 +63,7 @@ class TestTriggerLabelMode:
         session._trigger_times = {0: [0.0], 1: [2.5], 2: [5.1]}
 
         output = session.build_output()
-        assert output["presentation"]["id"]["audio"] == "audio/test.wav"
+        assert output["presentation"]["id"]["audio_path"] == "audio/test.wav"
 
     def test_url_and_method_injected_into_id(self):
         session = _make_session()
@@ -71,7 +71,7 @@ class TestTriggerLabelMode:
 
         output = session.build_output()
         id_obj = output["presentation"]["id"]
-        assert id_obj["url"] == ""
+        assert id_obj["audio_url"] == ""
         assert id_obj["method"] == METHOD_MANUAL
 
     def test_custom_url_and_method(self):
@@ -82,14 +82,14 @@ class TestTriggerLabelMode:
             presentation_details=PRESENTATION_DETAILS,
             audio_path=Path("audio/test.wav"),
             mode=MODE_TRIGGER_LABEL,
-            url="https://youtu.be/abc123",
+            audio_url="https://youtu.be/abc123",
             method="captions",
         )
         session._session_start = time.perf_counter()
 
         output = session.build_output()
         id_obj = output["presentation"]["id"]
-        assert id_obj["url"] == "https://youtu.be/abc123"
+        assert id_obj["audio_url"] == "https://youtu.be/abc123"
         assert id_obj["method"] == "captions"
 
     def test_trigger_times_are_lists(self):

@@ -15,7 +15,7 @@ TRIGGER_LABEL_DATA = {
             "uuid": "AAA",
             "name": "Test Show",
             "index": 0,
-            "audio": "audio/test.wav",
+            "audio_path": "audio/test.wav",
         },
         "groups": [
             {
@@ -35,7 +35,7 @@ SLIDE_LABEL_DATA = {
             "uuid": "BBB",
             "name": "Boundary Show",
             "index": 0,
-            "audio": "audio/test.wav",
+            "audio_path": "audio/test.wav",
         },
         "groups": [
             {
@@ -136,7 +136,7 @@ class TestPlaybackSession:
     def test_absolute_audio_path_unchanged(self):
         data = {
             "presentation": {
-                "id": {"uuid": "X", "name": "Y", "audio": "/absolute/path/song.wav"},
+                "id": {"uuid": "X", "name": "Y", "audio_path": "/absolute/path/song.wav"},
                 "groups": [{"slides": [{"trigger time": [1.0]}]}],
             }
         }
@@ -153,7 +153,7 @@ class TestPlaybackSession:
         controller = MagicMock()
         tmp_json = Path("/tmp/test_no_audio.json")
         tmp_json.write_text(json.dumps(data))
-        with pytest.raises(ValueError, match="presentation.id.audio"):
+        with pytest.raises(ValueError, match="presentation.id.audio_path"):
             PlaybackSession(controller=controller, json_path=tmp_json)
 
     def test_missing_audio_file_raises(self):

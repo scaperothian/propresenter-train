@@ -79,10 +79,10 @@ class PlaybackSession:
         raw = json_path.read_text()
         self._model = PresentationFile.model_validate_json(raw)
 
-        if not self._model.presentation.id.audio:
-            raise ValueError("JSON does not contain presentation.id.audio")
+        if not self._model.presentation.id.audio_path:
+            raise ValueError("JSON does not contain presentation.id.audio_path")
 
-        audio_path = Path(self._model.presentation.id.audio)
+        audio_path = Path(self._model.presentation.id.audio_path)
         if not audio_path.is_absolute():
             audio_path = json_path.parent / audio_path
         self.audio_path = audio_path
