@@ -16,7 +16,7 @@ from pathlib import Path
 
 from propresenter_client.main import ProPresenterController
 
-from .models import METHOD_CAPTIONS, METHOD_MANUAL, METHOD_MODEL
+from presenter_json import METHOD_MANUAL
 from .trainer import MODE_SLIDE_LABEL, MODE_TRIGGER_LABEL, TrainingSession
 
 
@@ -85,14 +85,9 @@ def _build_parser() -> argparse.ArgumentParser:
     meta_grp.add_argument(
         "--url",
         default="",
-        help="Source URL for the audio (e.g. YouTube link); written to presentation.id.url",
+        help="Source URL for the audio (e.g. YouTube link); written to presentation.id.audio_url",
     )
-    meta_grp.add_argument(
-        "--method",
-        default=METHOD_MANUAL,
-        choices=[METHOD_MANUAL, METHOD_CAPTIONS, METHOD_MODEL],
-        help="How timestamps were produced; written to presentation.id.method",
-    )
+
 
     out_grp = parser.add_argument_group("Output")
     out_grp.add_argument(
@@ -166,8 +161,8 @@ def main() -> None:
         presentation_details=details,
         audio_path=audio_path,
         mode=args.mode,
-        url=args.url,
-        method=args.method,
+        audio_url=args.url,
+        method=METHOD_MANUAL,
     )
 
     try:

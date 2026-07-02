@@ -4,9 +4,15 @@
       "uuid": "3F33ACB3-C30A-4ADA-836B-DBA0B7549585",
       "name": "Dont Let Me Be Misunderstood",
       "index": 48,
-      "audio": "../propresenter-dataset/the-animals/dont-let-me-be-misunderstood/studio_dont_let_me_be_misunderstood.wav",
-      "url": "",
-      "method": "manual"
+      "audio_path": "../propresenter-dataset/the-animals/dont-let-me-be-misunderstood/studio_dont_let_me_be_misunderstood.wav",
+      "audio_description": "",
+      "audio_url": "",
+      "method": "manual",
+      "method_description": "",
+      "method_url": "",
+      "method_version": "",
+      "version": "",
+      "comment": ""
     },
     "groups": [
       {

@@ -14,7 +14,7 @@ All timing values are lists of floats (seconds since audio start) to support
 multiple triggers per slide within a single training session.
 
 In both modes the output JSON mirrors the /v1/presentation/{uuid} API shape and
-adds presentation.id.audio with the path of the training audio file.
+adds presentation.id.audio_path with the path of the training audio file.
 """
 
 import json
@@ -28,7 +28,15 @@ import soundfile as sf
 
 from propresenter_client.main import ProPresenterController, _get_command
 
-from .models import METHOD_MANUAL, PresentationFile
+from presenter_json import (
+    METHOD_MANUAL,
+    clear_timing,
+    from_api_response,
+    iter_slides,
+    set_start_times,
+    set_stop_times,
+    set_trigger_times,
+)
 
 MODE_TRIGGER_LABEL = "trigger-label"
 MODE_SLIDE_LABEL = "slide-label"
@@ -43,15 +51,27 @@ class TrainingSession:
         presentation_details: dict,
         audio_path: Path,
         mode: str = MODE_TRIGGER_LABEL,
-        url: str = "",
+        audio_url: str = "",
+        audio_description: str = "",
         method: str = METHOD_MANUAL,
+        method_description: str = "",
+        method_url: str = "",
+        method_version: str = "",
+        version: str = "",
+        comment: str = "",
     ):
         self.controller = controller
         self.presentation_details = presentation_details
         self.audio_path = audio_path
         self.mode = mode
-        self.url = url
+        self.audio_url = audio_url
+        self.audio_description = audio_description
         self.method = method
+        self.method_description = method_description
+        self.method_url = method_url
+        self.method_version = method_version
+        self.version = version
+        self.comment = comment
 
         self._trigger_times: dict[int, list[float]] = {}   # trigger-label mode
         self._start_times: dict[int, list[float]] = {}     # slide-label mode
@@ -229,27 +249,30 @@ class TrainingSession:
         if self.mode == MODE_SLIDE_LABEL and self._current_index not in self._stop_times:
             self._append(self._stop_times, self._current_index, self._audio_duration)
 
-        model = PresentationFile.model_validate(self.presentation_details)
-        model.presentation.id.audio = str(self.audio_path)
-        model.presentation.id.url = self.url
-        model.presentation.id.method = self.method
+        model = from_api_response(self.presentation_details)
+        pid = model.presentation.id
+        pid.audio_path = str(self.audio_path)
+        pid.audio_url = self.audio_url
+        pid.audio_description = self.audio_description
+        pid.method = self.method
+        pid.method_description = self.method_description
+        pid.method_url = self.method_url
+        pid.method_version = self.method_version
+        pid.version = self.version
+        pid.comment = self.comment
 
-        slide_index = 0
-        for group in model.presentation.groups:
-            for slide in group.slides:
-                for key in ("trigger time", "start time", "stop time"):
-                    slide.model_extra.pop(key, None)
-                if self.mode == MODE_SLIDE_LABEL:
-                    if slide_index in self._start_times:
-                        slide.model_extra["start time"] = self._start_times[slide_index]
-                    if slide_index in self._stop_times:
-                        slide.model_extra["stop time"] = self._stop_times[slide_index]
-                else:
-                    if slide_index in self._trigger_times:
-                        slide.model_extra["trigger time"] = self._trigger_times[slide_index]
-                slide_index += 1
+        for slide_index, slide in enumerate(iter_slides(model)):
+            clear_timing(slide)
+            if self.mode == MODE_SLIDE_LABEL:
+                if slide_index in self._start_times:
+                    set_start_times(slide, self._start_times[slide_index])
+                if slide_index in self._stop_times:
+                    set_stop_times(slide, self._stop_times[slide_index])
+            else:
+                if slide_index in self._trigger_times:
+                    set_trigger_times(slide, self._trigger_times[slide_index])
 
-        return model.model_dump(by_alias=True)
+        return json.loads(model.model_dump_json())
 
     # ------------------------------------------------------------------
     # Persistence
