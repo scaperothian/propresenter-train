@@ -432,15 +432,16 @@ description = "Python client for the ProPresenter REST API"
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
-files = []
-develop = true
+files = [
+    {file = "propresenter_client-0.1.0-py3-none-any.whl", hash = "sha256:682e3c42c5ef6decb3657f490102c0b2406c1d96b90b7b48c39fe97d8e67800d"},
+    {file = "propresenter_client-0.1.0.tar.gz", hash = "sha256:77ed62ffb4966c90fa70eeefe13258621771dc0d14778c7afc0a7a685c09940a"},
+]
 
 [package.dependencies]
-requests = "^2.33.1"
+requests = ">=2.31"
 
-[package.source]
-type = "directory"
-url = "../propresenter-client"
+[package.extras]
+dev = ["build (>=1.0)", "pytest (>=7.0)", "pytest-cov (>=4.0)"]
 
 [[package]]
 name = "pycparser"
@@ -763,4 +764,4 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<4.0"
-content-hash = "daf8084813685e630602b7e663769c89a2ab1df9fa22bfea53465500206a6a37"
+content-hash = "1cfc2cdb2e8a854190931f00ec6d8ae5c516ebe138cd54a6e286d29981c26f33"

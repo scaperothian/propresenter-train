@@ -12,7 +12,7 @@ sounddevice = "*"
 soundfile = "*"
 numpy = ">=2.0"
 requests = "*"
-propresenter-client = {path = "../propresenter-client", develop = true}
+propresenter-client = "^0.1.0"
 presenter-json = "^0.1.0"
 
 [tool.poetry.group.dev.dependencies]
