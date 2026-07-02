@@ -12,8 +12,8 @@ sounddevice = "*"
 soundfile = "*"
 numpy = ">=2.0"
 requests = "*"
-pydantic = "^2.0"
 propresenter-client = {path = "../propresenter-client", develop = true}
+presenter-json = "^0.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.0"

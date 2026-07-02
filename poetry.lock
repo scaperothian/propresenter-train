@@ -411,6 +411,21 @@ dev = ["pre-commit", "tox"]
 testing = ["coverage", "pytest", "pytest-benchmark"]
 
 [[package]]
+name = "presenter-json"
+version = "0.1.0"
+description = "Pydantic models and JSON helpers for presentation timing format, shared across projects"
+optional = false
+python-versions = "<4.0,>=3.11"
+groups = ["main"]
+files = [
+    {file = "presenter_json-0.1.0-py3-none-any.whl", hash = "sha256:321e8d7ad24afdfc4196ce48db682f49bbf944e47cbb2e9dc85d1b1ed899a3dd"},
+    {file = "presenter_json-0.1.0.tar.gz", hash = "sha256:1da0dc2eb4f9a622c05c5e1079fa6ddaf382325d072e893c2c8442d1e4b9a48b"},
+]
+
+[package.dependencies]
+pydantic = ">=2.0,<3.0"
+
+[[package]]
 name = "propresenter-client"
 version = "0.1.0"
 description = "Python client for the ProPresenter REST API"
@@ -748,4 +763,4 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<4.0"
-content-hash = "b79883c57f9e37629271e1dcb9127b341ccecc20a6698e4a6fe94bf4274a76e6"
+content-hash = "daf8084813685e630602b7e663769c89a2ab1df9fa22bfea53465500206a6a37"

@@ -19,18 +19,12 @@ import sounddevice as sd
 import soundfile as sf
 
 from propresenter_client.main import ProPresenterController
-
-from .models import PresentationFile
-
-_TIMING_KEY_PRIORITY = ("start time", "trigger time")
-
-
-def _detect_timing_key(slides: list) -> Optional[str]:
-    """Return the first timing key found across all slides, or None."""
-    for key in _TIMING_KEY_PRIORITY:
-        if any(isinstance(s, dict) and key in s for s in slides):
-            return key
-    return None
+from presenter_json import (
+    cues as _presenter_cues,
+    detect_timing_key,
+    from_api_response,
+    load_presentation,
+)
 
 
 def load_cues(data: dict) -> tuple[str, list[tuple[float, int]]]:
@@ -40,27 +34,15 @@ def load_cues(data: dict) -> tuple[str, list[tuple[float, int]]]:
     Returns (timing_key_used, cue_list) where cue_list is sorted by timestamp.
     Raises ValueError if no timing data is found.
     """
-    slides = ProPresenterController.find_slides(data)
-    timing_key = _detect_timing_key(slides)
+    model = from_api_response(data)
+    timing_key = detect_timing_key(model)
     if timing_key is None:
         raise ValueError(
             "No timing data found in JSON. "
             "Expected 'start time' (slide-label) or 'trigger time' (trigger-label)."
         )
-
-    cues: list[tuple[float, int]] = []
-    for idx, slide in enumerate(slides):
-        if not isinstance(slide, dict):
-            continue
-        values = slide.get(timing_key)
-        if not isinstance(values, list):
-            continue
-        for t in values:
-            if isinstance(t, (int, float)):
-                cues.append((float(t), idx + 1))
-
-    cues.sort(key=lambda x: x[0])
-    return timing_key, cues
+    result = [(c.time, c.slide_index + 1) for c in _presenter_cues(model, timing_key=timing_key)]
+    return timing_key, result
 
 
 class PlaybackSession:
@@ -76,8 +58,7 @@ class PlaybackSession:
         self.json_path = json_path
         self.device = device
 
-        raw = json_path.read_text()
-        self._model = PresentationFile.model_validate_json(raw)
+        self._model = load_presentation(json_path)
 
         if not self._model.presentation.id.audio_path:
             raise ValueError("JSON does not contain presentation.id.audio_path")
@@ -89,7 +70,13 @@ class PlaybackSession:
         if not self.audio_path.is_file():
             raise FileNotFoundError(f"Audio file not found: {self.audio_path}")
 
-        self.timing_key, self.cues = load_cues(self._model.model_dump(by_alias=True))
+        self.timing_key = detect_timing_key(self._model)
+        if self.timing_key is None:
+            raise ValueError(
+                "No timing data found in JSON. "
+                "Expected 'start time' (slide-label) or 'trigger time' (trigger-label)."
+            )
+        self.cues = [(c.time, c.slide_index + 1) for c in _presenter_cues(self._model, timing_key=self.timing_key)]
 
     @property
     def presentation_name(self) -> str:

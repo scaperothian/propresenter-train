@@ -7,7 +7,7 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from propresenter_train.models import METHOD_MANUAL
+from presenter_json import METHOD_MANUAL
 from propresenter_train.trainer import (
     MODE_SLIDE_LABEL,
     MODE_TRIGGER_LABEL,

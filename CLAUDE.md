@@ -12,13 +12,13 @@ per-slide timing keys added. Supports two modes:
 | `trigger-label` (default) | `--mode trigger-label` | `"trigger time"` — when the slide was cued |
 | `slide-label` | `--mode slide-label` | `"start time"` and `"stop time"` — audio section boundaries |
 
-In all modes these keys are added to `presentation.id`:
+In all modes these keys are added to `presentation.id` (schema defined in `../presenter-json`):
 
 | Key | Description |
 |-----|-------------|
-| `audio` | Path to the training audio file — absolute or relative to the JSON file's directory |
-| `url` | Source URL (e.g. YouTube link); empty string by default |
-| `method` | How timestamps were made: `manual` \| `captions` \| `model`; defaults to `manual` |
+| `audio_path` | Path to the training audio file — absolute or relative to the JSON file's directory |
+| `audio_url` | Source URL (e.g. YouTube link); empty string by default |
+| `method` | How timestamps were made — always `manual` for this tool |
 | `version` | Generator version string written by upstream tools (e.g. slide-agent); empty string by default |
 
 All timing values are **lists of floats** (seconds since audio start) to support
@@ -36,7 +36,7 @@ systems (propresenter-speech, etc.) against the same audio file.
 | Playback engine | `src/propresenter_train/playback.py` — `PlaybackSession`, `load_cues()` |
 | Playback CLI entry point | `src/propresenter_train/playback_main.py` |
 | Mode constants | `trainer.py` — `MODE_TRIGGER_LABEL`, `MODE_SLIDE_LABEL` |
-| Method constants | `trainer.py` — `METHOD_MANUAL`, `METHOD_CAPTIONS`, `METHOD_MODEL` |
+| JSON schema + helpers | `../presenter-json` — `PresentationFile`, `cues()`, `detect_timing_key()`, etc. |
 | ProPresenter HTTP client | `../propresenter-client/src/propresenter_client/main.py` — imported via path dep |
 
 `TrainingSession` reuses `_get_command()` and `ProPresenterController` directly from
@@ -99,7 +99,7 @@ poetry run propresenter-train audio/worship.wav "Worship" --host 192.168.1.10
 # Search a non-default library
 poetry run propresenter-train audio/song.wav "Amazing Grace" --library Songs
 
-# Attach a source URL to the output JSON
+# Attach a source URL (written to presentation.id.audio_url)
 poetry run propresenter-train audio/sermon.wav "Sunday Sermon" --url "https://youtu.be/abc123"
 
 # Play back a gold-copy JSON to evaluate timing quality
@@ -130,8 +130,8 @@ Tests are unit-level — no audio hardware, no ProPresenter server required.
 
 ## Output JSON shape
 
-`presentation.id` always contains `audio`, `url`, and `method` in addition to
-the fields returned by the ProPresenter API.
+`presentation.id` always contains `audio_path`, `audio_url`, and `method` in addition to
+the fields returned by the ProPresenter API (full schema in `../presenter-json`).
 
 ### trigger-label mode
 
@@ -142,8 +142,8 @@ the fields returned by the ProPresenter API.
       "uuid": "...",
       "name": "My Presentation",
       "index": 0,
-      "audio": "audio/sermon.wav",
-      "url": "",
+      "audio_path": "audio/sermon.wav",
+      "audio_url": "",
       "method": "manual"
     },
     "groups": [
@@ -169,8 +169,8 @@ the fields returned by the ProPresenter API.
       "uuid": "...",
       "name": "My Presentation",
       "index": 0,
-      "audio": "audio/sermon.wav",
-      "url": "",
+      "audio_path": "audio/sermon.wav",
+      "audio_url": "",
       "method": "manual"
     },
     "groups": [

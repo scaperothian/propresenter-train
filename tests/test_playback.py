@@ -89,7 +89,7 @@ class TestLoadCues:
         with pytest.raises(ValueError, match="No timing data"):
             load_cues(data)
 
-    def test_slide_label_preferred_over_trigger_label(self):
+    def test_trigger_label_preferred_over_slide_label(self):
         data = {
             "presentation": {
                 "groups": [
@@ -102,7 +102,7 @@ class TestLoadCues:
             }
         }
         key, _ = load_cues(data)
-        assert key == "start time"
+        assert key == "trigger time"
 
     def test_untimed_slides_are_skipped(self):
         _, cues = load_cues(TRIGGER_LABEL_DATA)
